@@ -1,4 +1,4 @@
-module github.com/FUSAKLA/sdk
+module github.com/fusakla/sdk
 
 go 1.16
 
