@@ -289,11 +289,16 @@ type (
 			Min         *float64 `json:"min,omitempty"`
 			Max         *float64 `json:"max,omitempty"`
 			Mode        string   `json:"mode"`
+			Fill        string   `json:"fill"`
 		} `json:"color"`
 		DataFormat      string `json:"dataFormat"`
 		Calculate       bool   `json:"calculate"`
 		HideZeroBuckets bool   `json:"hideZeroBuckets"`
 		HighlightCards  bool   `json:"highlightCards"`
+		CellGap         int    `json:"cellGap"`
+		CellValues strict {
+			Unit string `json:"unit"`
+		} `json:"cellValues"`
 		Legend          struct {
 			Show bool `json:"show"`
 		} `json:"legend"`
@@ -310,13 +315,15 @@ type (
 		XBucketNumber *float64 `json:"xBucketNumber"`
 		XBucketSize   *string  `json:"xBucketSize"`
 		YAxis         struct {
-			Decimals    *int     `json:"decimals"`
-			Format      string   `json:"format"`
-			LogBase     int      `json:"logBase"`
-			Show        bool     `json:"show"`
-			Max         *string  `json:"max"`
-			Min         *string  `json:"min"`
-			SplitFactor *float64 `json:"splitFactor"`
+			Decimals      *int     `json:"decimals"`
+			Format        string   `json:"format"`
+			LogBase       int      `json:"logBase"`
+			Show          bool     `json:"show"`
+			Max           *string  `json:"max"`
+			Min           *string  `json:"min"`
+			SplitFactor   *float64 `json:"splitFactor"`
+			AxisPlacement string   `json:"axisPlacement"`
+			Unit          string   `json:"unit"`
 		} `json:"yAxis"`
 		YBucketBound  string      `json:"yBucketBound"`
 		YBucketNumber *float64    `json:"yBucketNumber"`
