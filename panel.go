@@ -296,10 +296,10 @@ type (
 		HideZeroBuckets bool   `json:"hideZeroBuckets"`
 		HighlightCards  bool   `json:"highlightCards"`
 		CellGap         int    `json:"cellGap"`
-		CellValues strict {
+		CellValues      struct {
 			Unit string `json:"unit"`
 		} `json:"cellValues"`
-		Legend          struct {
+		Legend struct {
 			Show bool `json:"show"`
 		} `json:"legend"`
 		ReverseYBuckets bool     `json:"reverseYBuckets"`
