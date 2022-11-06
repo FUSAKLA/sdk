@@ -80,6 +80,7 @@ type (
 			X *int `json:"x,omitempty"`
 			Y *int `json:"y,omitempty"`
 		} `json:"gridPos,omitempty"`
+		MaxPerRow        int         `json:"maxPerRow"`
 		Height           interface{} `json:"height,omitempty"` // general
 		HideTimeOverride *bool       `json:"hideTimeOverride,omitempty"`
 		ID               uint        `json:"id"`
@@ -96,7 +97,7 @@ type (
 			Text     string `json:"text"`
 			Value    string `json:"value"`
 		} `json:"scopedVars,omitempty"`
-		Span        float32 `json:"span"`                  // general
+		Span        int `json:"span"`                  // general
 		Title       string  `json:"title"`                 // general
 		Description *string `json:"description,omitempty"` // general
 		Transparent bool    `json:"transparent"`
@@ -186,12 +187,13 @@ type (
 		Sort         int    `json:"sort,omitempty"`
 	}
 	TablePanel struct {
-		Columns   []Column      `json:"columns"`
-		Sort      *Sort         `json:"sort,omitempty"`
-		Styles    []ColumnStyle `json:"styles"`
-		Transform string        `json:"transform"`
-		Targets   []Target      `json:"targets,omitempty"`
-		Scroll    bool          `json:"scroll"` // from grafana 3.x
+		Columns     []Column      `json:"columns"`
+		Sort        *Sort         `json:"sort,omitempty"`
+		Styles      []ColumnStyle `json:"styles"`
+		Transform   string        `json:"transform"`
+		Targets     []Target      `json:"targets,omitempty"`
+		Scroll      bool          `json:"scroll"` // from grafana 3.x
+		FieldConfig FieldConfig   `json:"fieldConfig"`
 	}
 	TextPanel struct {
 		Content     string        `json:"content"`
@@ -291,6 +293,33 @@ type (
 			Mode        string   `json:"mode"`
 			Fill        string   `json:"fill"`
 		} `json:"color"`
+		Options struct {
+			Calculate bool `json:"calculate"`
+			YAxis     struct {
+				Max           *string `json:"max"`
+				Min           *string `json:"min"`
+				AxisPlacement string  `json:"axisPlacement"`
+				Unit          string  `json:"unit"`
+			} `json:"yAxis"`
+			CellGap int `json:"cellGap"`
+			Tooltip struct {
+				Show          bool `json:"show"`
+				ShowHistogram bool `json:"showHistogram"`
+			} `json:"tooltip"`
+			Legend struct {
+				Show bool `json:"show"`
+			} `json:"legend"`
+			Color struct {
+				CardColor   string   `json:"cardColor"`
+				ColorScale  string   `json:"colorScale"`
+				ColorScheme string   `json:"colorScheme"`
+				Exponent    float64  `json:"exponent"`
+				Min         *float64 `json:"min,omitempty"`
+				Max         *float64 `json:"max,omitempty"`
+				Mode        string   `json:"mode"`
+				Fill        string   `json:"fill"`
+			} `json:"color"`
+		} `json:"options"`
 		DataFormat      string `json:"dataFormat"`
 		Calculate       bool   `json:"calculate"`
 		HideZeroBuckets bool   `json:"hideZeroBuckets"`
@@ -340,12 +369,14 @@ type (
 		Tooltip TimeseriesTooltipOptions `json:"tooltip,omitempty"`
 	}
 	TimeseriesLegendOptions struct {
+		ShowLegend  bool     `json:"showLegend"`
 		Calcs       []string `json:"calcs"`
 		DisplayMode string   `json:"displayMode"`
 		Placement   string   `json:"placement"`
 	}
 	TimeseriesTooltipOptions struct {
 		Mode string `json:"mode"`
+		Sort string `json:"sort"`
 	}
 	FieldConfigDefaults struct {
 		Unit       string            `json:"unit"`
